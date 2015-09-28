@@ -1,9 +1,18 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-$api_key = "your-key";
+$api_key = "your key";
 $word=!empty($_GET["text"])?$_GET["text"]:NULL;
 $from = "ru";
 $to = "uk";
+
+        $text=  str_replace("\n", " ", $word);
+        $text_array=  explode(" ", $text);
+        $text_parts=array();
+        $length=0;
+        $part=0;
+        $text_parts[$part]="";
+
+
 $lang_caple="ru-uk";
          $str_arr = explode(" ", $word);
          krsort($str_arr);
@@ -30,9 +39,20 @@ $lang_caple="ru-uk";
                  }
              }
          }
+
+
             if (empty($word)){
                 echo json_encode(["status"=>"error", "massage"=>"You must specify text"]);
                 exit();
+            }
+
+
+
+
+
+ foreach ($text_array as $word){
+            if (empty($word)){
+                continue;
             }
             $length+=mb_strlen($word)+2;
             if($length>700){
@@ -41,7 +61,9 @@ $lang_caple="ru-uk";
                 $text_parts[$part]="";
             }
             $text_parts[$part].="{$word} ";
-         $res_parts = array();
+        }
+        $res_parts = array();
+
          foreach ($text_parts as $part=>$value){
              exec("echo '{$value}' | translate {$from} {$to} ", $res);
              $res_parts[]=!empty($res[0])?$res[0]:"";
@@ -49,4 +71,6 @@ $lang_caple="ru-uk";
         }
 $translated_text = implode(" ", $res_parts);
 echo json_encode(["status"=>"ok", "text"=>$translated_text, "direct"=>$lang_caple]);
+
 ?>
+
