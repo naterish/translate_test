@@ -52,7 +52,4 @@ if($translate->code==403){
 if($translate->code==404){
     echo json_encode(["status"=>"error", "massage"=> "Month lomit"]);
 }
- 
-return $lang;
- 
-}
+
