@@ -17,5 +17,5 @@ mv ./g-translate/index.php /var/www/php/g-translate/index.php
 mv ./y-translate/index.php /var/www/php/y-translate/index.php
 apt-get install python-pip -y
 pip install py-translate
-
+pip install futures
 
