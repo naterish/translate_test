@@ -2,6 +2,9 @@
 header('Content-Type: application/json; charset=utf-8');
 $api_key = "your key";
 $word=!empty($_GET["text"])?$_GET["text"]:NULL;
+if(empty($word)){
+        $word=!empty($_POST["text"])?$_POST["text"]:NULL;
+}
 $from = "ru";
 $to = "uk";
 
