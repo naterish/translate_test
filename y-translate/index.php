@@ -2,6 +2,9 @@
 header('Content-Type: application/json; charset=utf-8');
 $api_key = "your-key";
 $text = !empty($_GET["text"])?$_GET["text"]:NULL;
+if(empty($text)){
+    $text = !empty($_POST["text"])?$_POST["text"]:NULL;
+}
 if (empty($text)){
     echo json_encode(["status"=>"error", "massage"=> "You must specify text"]);
     exit();
